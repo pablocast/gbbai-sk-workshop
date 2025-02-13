@@ -29,4 +29,4 @@ cd lab/chat-app/python
 pip install -r requirements.txt 
 ```
 
-2. Ejecutar el [noteook](../lab/chat-app/infra/set_up_env.ipynb)
+2. Ejecutar el [notebook](../lab/chat-app/infra/set_up.ipynb)
