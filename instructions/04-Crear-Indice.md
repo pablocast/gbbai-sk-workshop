@@ -34,8 +34,6 @@ La solución de tu aplicación de IA generativa integrará datos personalizados 
         - Switzerland 
     - **Pricing tier**: Basic
 
-    > \* Más adelante, vas a crear un Azure AI Hub (que incluye un servicio Azure OpenAI) en la misma región que tu recurso de Azure AI Search. Los recursos de Azure OpenAI están restringidos a nivel de inquilino por cuotas regionales. Las regiones listadas incluyen cuota predeterminada para el(los) tipo(s) de modelo(s) utilizado(s) en este ejercicio. Elegir una región al azar reduce el riesgo de que una sola región alcance su límite de cuota en escenarios donde compartes un inquilino con otros usuarios. En el caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que necesites crear otro hub de Azure AI en una región diferente.
-
 3. Espera a que se complete el despliegue de tu recurso de Azure AI Search.
 
 ## Crear un proyecto de Azure OpenAI Service
