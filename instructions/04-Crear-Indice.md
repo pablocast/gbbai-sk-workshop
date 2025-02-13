@@ -107,159 +107,26 @@ Necesitas dos modelos para implementar tu solución:
 ## Crear un índice para tus datos
 
 Ahora vamos a crear un índice en tu recurso de Azure AI Search.
+Ingresa al recurso de Azure AI Search.
 
-- Seleccione **Import and Vectorize data**
+1. Seleccione **Import and Vectorize data**
 
-- Conectarse a los datos
+2. Conectarse a los datos
  ![Captura de pantalla del Wizard de Search](./media/azure-search-step-1.png)
 
-- Vectorizar 
+3. Vectorizar 
  ![Captura de pantalla del Wizard de Search](./media/azure-search-step-2.png)
 
-- Revisar y Crear
+4. Revisar y Crear
  ![Captura de pantalla del Wizard de Search](./media/azure-search-step-3.png)
-
 
 ## Probar el índice
 
-Antes de utilizar tu índice en un flujo de solicitud basado en RAG, verifiquemos que se puede usar para generar respuestas de IA generativa.
+Ahora vamos a probar el índice creado dentro del recurso de Azure AI Search
+Ingresa al recurso de Azure AI Search.
 
-1. En el panel de navegación a la izquierda, selecciona la página **Playgrounds**.
-1. En la página de Chat, en el panel de Configuración, asegúrate de que esté seleccionado el despliegue del modelo **gpt-35-turbo-16k**. Luego, en el panel principal de la sesión de chat, envía la solicitud `Where can I stay in New York?`
-1. Revisa la respuesta, que debería ser una respuesta genérica del modelo sin datos del índice.
-1. En el panel de Configuración, expande el campo **Agregar tus datos**, y luego agrega el índice del proyecto **brochures-index** y selecciona el tipo de búsqueda **hybrid (vector + keyword)**.
+1. Selecciona **Search Management**, **Indexes**  y accede al indice creado
 
-   > **Nota**: Algunos usuarios están encontrando que los índices recién creados no están disponibles de inmediato. Actualizar el navegador generalmente ayuda, pero si aún experimentas el problema de que no se encuentra el índice, puede que necesites esperar hasta que el índice sea reconocido.
+2. En la barra **Search** escribe: `Cobro por Avalúo de bien para garantía de crédito` 
 
-1. Después de que el índice se haya agregado y la sesión de chat se reinicie, vuelve a enviar la solicitud `Where can I stay in New York?`
-1. Revisa la respuesta, que debería basarse en los datos del índice.
-
-## Usar el índice en un flujo de solicitudes
-
-Tu índice vectorial se ha guardado en tu proyecto de Azure AI Foundry, lo que te permite utilizarlo fácilmente en un flujo de solicitudes.
-
-1. En el portal Azure AI Foundry, en tu proyecto, en el panel de navegación a la izquierda, bajo **Build and customize**, selecciona la página **Prompt flow**.
-1. Crea un nuevo flujo de solicitudes clonando la muestra **Multi-Round Q&A on Your Data** de la galería. Guarda tu clon de esta muestra en una carpeta llamada `brochure-flow`.
-    <details>  
-      <summary><b>Consejo para solución de problemas</b>: Error de permisos</summary>
-        <p>Si recibes un error de permisos al crear un nuevo flujo de solicitudes, intenta lo siguiente para solucionarlo:</p>
-        <ul>
-          <li>En el portal de Azure, selecciona el recurso de AI Services.</li>
-          <li>Bajo Resource Management, en la pestaña Identity, confirma que tiene asignada la identidad administrada del sistema.</li>
-          <li>Navega a la Storage Account asociada. En la página de IAM, añade la asignación de rol <em>Storage blob data reader</em>.</li>
-          <li>Bajo <strong>Assign access to</strong>, elige <strong>Managed Identity</strong>, <strong>+ Select members</strong>, selecciona las <strong>All system-assigned managed identities</strong> y selecciona tu recurso de Azure AI Services.</li>
-          <li>Revisa y asigna para guardar la nueva configuración y reintenta el paso anterior.</li>
-        </ul>
-    </details>
-
-1. Cuando se abra la página del diseñador de flujos de solicitud, revisa **brochure-flow**. Su diagrama debería parecerse a la siguiente imagen:
-
-    ![Una captura de pantalla de un diagrama de flujo de chat](./media/chat-flow.png)
-
-    La muestra de flujo de solicitud que estás utilizando implementa la lógica para una aplicación de chat en la que el usuario puede enviar de forma iterativa entradas de texto. El historial conversacional se retiene y se incluye en el contexto para cada iteración. El flujo de solicitud orquesta una secuencia de *herramientas* para:
-
-    - Añadir el historial a la entrada de chat para definir una solicitud en forma de pregunta contextualizada.
-    - Recuperar el contexto utilizando tu índice y un tipo de consulta de tu elección basado en la pregunta.
-    - Generar un contexto de solicitud utilizando los datos recuperados del índice para complementar la pregunta.
-    - Crear variantes de la solicitud añadiendo un mensaje del sistema y estructurando el historial de chat.
-    - Enviar la solicitud a un modelo de lenguaje para generar una respuesta en lenguaje natural.
-
-1. Usa el botón **Start compute session** para iniciar el cómputo en tiempo real para el flujo.
-
-    Espera a que se inicie la sesión de cómputo. Esto proporciona un contexto de cómputo para el flujo de solicitudes. Mientras esperas, revisa en la pestaña **Flow** las secciones correspondientes a las herramientas del flujo.
-
-1. En la sección **Inputs**, asegúrate de que las entradas incluyan:
-    - **chat_history**
-    - **chat_input**
-
-    El historial de chat predeterminado en esta muestra incluye algunas conversaciones sobre IA.
-
-1. En la sección **Outputs**, asegúrate de que la salida incluya:
-
-    - **chat_output** con el valor ${chat_with_context.output}
-
-1. En la sección **modify_query_with_history**, selecciona la siguiente configuración (dejando las demás como están):
-
-    - **Connection**: *El recurso de Azure OpenAI predeterminado para tu AI hub*
-    - **Api**: chat
-    - **deployment_name**: gpt-35-turbo-16k
-    - **response_format**: {"type":"text"}
-
-1. Espera a que la sesión de cómputo se inicie, luego en la sección **lookup**, establece los siguientes valores de parámetros:
-
-    - **mlindex_content**: *Selecciona el campo vacío para abrir el panel Generate*
-        - **index_type**: Registered Index
-        - **mlindex_asset_id**: brochures-index:1
-    - **queries**: ${modify_query_with_history.output}
-    - **query_type**: Hybrid (vector + keyword)
-    - **top_k**: 2
-
-1. En la sección **generate_prompt_context**, revisa el script de Python y asegúrate de que las **inputs** para esta herramienta incluyan el siguiente parámetro:
-
-    - **search_result** *(object)*: ${lookup.output}
-
-1. En la sección **Prompt_variants**, revisa el script de Python y asegúrate de que las **inputs** para esta herramienta incluyan los siguientes parámetros:
-
-    - **contexts** *(string)*: ${generate_prompt_context.output}
-    - **chat_history** *(string)*: ${inputs.chat_history}
-    - **chat_input** *(string)*: ${inputs.chat_input}
-
-1. En la sección **chat_with_context**, selecciona la siguiente configuración (dejando las demás como están):
-
-    - **Connection**: Default_AzureOpenAI
-    - **Api**: Chat
-    - **deployment_name**: gpt-35-turbo-16k
-    - **response_format**: {"type":"text"}
-
-    Luego, asegúrate de que las **inputs** para esta herramienta incluyan los siguientes parámetros:
-    - **prompt_text** *(string)*: ${Prompt_variants.output}
-
-1. En la barra de herramientas, usa el botón **Save** para guardar los cambios realizados en las herramientas del flujo de solicitudes.
-1. En la barra de herramientas, selecciona **Chat**. Se abrirá un panel de chat con el historial de conversación de la muestra y la entrada completada automáticamente basada en los valores de ejemplo. Puedes ignorar estos valores.
-1. En el panel de chat, reemplaza la entrada predeterminada con la pregunta `Where can I stay in London?` y envíala.
-1. Revisa la respuesta, la cual debería basarse en los datos del índice.
-1. Revisa las salidas de cada herramienta en el flujo.
-1. En el panel de chat, ingresa la pregunta `What can I do there?`
-1. Revisa la respuesta, que debería basarse en los datos del índice y tener en cuenta el historial de chat (de modo que "there" se entienda como "en Londres").
-1. Revisa las salidas de cada herramienta en el flujo, notando cómo cada herramienta operó sobre sus entradas para preparar una solicitud contextualizada y obtener una respuesta apropiada.
-
-## Desplegar el flujo
-
-Ahora que tienes un flujo funcional que utiliza tus datos indexados, puedes desplegarlo como un servicio para ser consumido por una aplicación copiloto.
-
-> **Nota**: Dependiendo de la región y la carga del centro de datos, los despliegues a veces pueden tardar un tiempo y en ocasiones pueden arrojar un error al interactuar con el despliegue. Si lo deseas, puedes continuar con la sección de desafíos mientras se despliega o saltarte la prueba de tu despliegue si tienes poco tiempo.
-
-1. En la barra de herramientas, selecciona **Deploy**.
-1. Crea un despliegue con la siguiente configuración:
-    - **Basic settings**:
-        - **Endpoint**: New
-        - **Endpoint name**: *Usa el nombre de endpoint único predeterminado*
-        - **Deployment name**: *Usa el nombre de despliegue predeterminado*
-        - **Virtual machine**: Standard_DS3_v2
-        - **Instance count**: 3
-        - **Inferencing data collection**: Seleccionado
-    - **Advanced settings**:
-        - *Usa la configuración predeterminada*
-1. En el portal Azure AI Foundry, en tu proyecto, en el panel de navegación a la izquierda, bajo **My assets**, selecciona la página **Models + endpoints**.
-1. Sigue actualizando la vista hasta que el despliegue **brochure-endpoint-1** se muestre como *succeeded* bajo el endpoint **brochure-endpoint** (esto puede tomar un período de tiempo considerable).
-1. Cuando el despliegue haya sido exitoso, selecciónalo. Luego, en su página **Test**, ingresa la solicitud `What is there to do in San Francisco?` y revisa la respuesta.
-1. Ingresa la solicitud `Where else could I go?` y revisa la respuesta.
-1. Visualiza la página **Consume** del endpoint y observa que contiene la información de conexión y código de ejemplo que puedes utilizar para construir una aplicación cliente para tu endpoint, permitiéndote integrar la solución del flujo de solicitudes en una aplicación como un copiloto personalizado.
-
-## Desafío 
-
-¡Ahora has experimentado cómo integrar tus propios datos en una aplicación de IA generativa construida con el portal Azure AI Foundry, vamos a profundizar aún más!
-
-Intenta agregar una nueva fuente de datos a través del portal Azure AI Foundry, indexarla e integrarla en un flujo de solicitudes. Algunos conjuntos de datos que podrías probar son:
-
-- Una colección de artículos (de investigación) que tengas en tu computadora.
-- Un conjunto de presentaciones de conferencias pasadas.
-- Cualquiera de los conjuntos de datos disponibles en el repositorio de [Azure Search sample data](https://github.com/Azure-Samples/azure-search-sample-data).
-
-¡Sé lo más ingenioso posible para crear tu propia fuente de datos e integrarla en tu flujo de solicitudes! Prueba el nuevo flujo de solicitudes y envía preguntas que solo puedan ser respondidas usando el conjunto de datos que hayas elegido.
-
-## Limpieza
-
-Para evitar costos y utilización innecesaria de recursos en Azure, deberías eliminar los recursos desplegados en este ejercicio.
-
-1. Si ya has finalizado la exploración de Azure AI Foundry, regresa al [portal de Azure](https://portal.azure.com) en `https://portal.azure.com` e inicia sesión con tus credenciales de Azure si es necesario. Luego, elimina los recursos en el grupo de recursos donde se aprovisionaron tu recurso de Azure AI Search y los recursos de Azure AI.
+ ![Captura de pantalla del Wizard de Search](./media/azure-search-step-4.png)
