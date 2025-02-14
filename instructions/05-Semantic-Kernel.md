@@ -32,4 +32,22 @@ pip install -r requirements.txt
 
 2. Ejecutar el [notebook](../lab/chat-app/infra/set_up.ipynb)
 
-## [Crear Infrastructura](../lab/chat-app/infra/set_up.ipynb)
+3. Adicionar las variables de ambiente con los recursos creados en [.env](./lab/chat-app/python/.sample-env). Renombrar el archivo de .sample-env a .env
+
+
+## [Indexar documentos en AI Search y Cargar datos fake transaccionales en Postgres](../lab/chat-app/data/load.ipynb)
+
+
+
+
+
+
+
+
+
+<a id='clean'></a>
+### 🗑️ Limpiar recursos
+
+Cuando hayas terminado con el laboratorio, debes eliminar todos los recursos desplegados en Azure para evitar cargos adicionales y mantener tu suscripción de Azure organizada.  
+Utiliza el [clean-up-resources notebook](./lab/chat-app/clea-up-resources.ipynb) para ello.
+
