@@ -2,6 +2,7 @@
 lab:
     title: 'Crear una aplicación de chat con IA generativa'
     description: 'Aprende cómo usar el Azure AI Foundry SDK para construir una aplicación que se conecta a tu proyecto y conversa con un modelo de lenguaje.'
+    time: '30 min'
 ---
 
 # Crear una aplicación de chat con IA generativa

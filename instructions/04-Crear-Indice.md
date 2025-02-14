@@ -2,6 +2,7 @@
 lab:
     title: 'Crear una aplicación de IA generativa que utiliza tus propios datos'
     description: 'Aprende cómo utilizar el modelo Retrieval Augmented Generation (RAG) para construir una aplicación de chat que base las solicitudes en tus propios datos.'
+    time: '30 min'
 ---
 
 # Crear una aplicación de IA generativa que utiliza tus propios datos

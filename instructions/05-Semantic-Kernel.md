@@ -2,6 +2,7 @@
 lab:
     title: 'Crear un bot usando Semantic Kernel'
     description: 'Aprende cómo crear un Agente de Semantic Kernel con Plugins Nativos'
+    time: '120 min'
 ---
 
 # Descripción
@@ -20,7 +21,7 @@ Este ejemplo proporciona una plantilla y una guía sobre cómo desplegar un asis
 - [Sign in to Azure with Azure CLI](https://learn.microsoft.com/cli/azure/authenticate-azure-cli-interactively)
 - [Bot Emulator](https://learn.microsoft.com/en-us/azure/bot-service/bot-service-debug-emulator?view=azure-bot-service-4.0&tabs=csharp)
 
-## [Crear Infrastructura](../lab/chat-app/infra/set_up_env.ipynb)
+## [Crear Infrastructura](../lab/chat-app/infra/set_up.ipynb)
 
 1. Python
 ```bash
@@ -30,3 +31,5 @@ pip install -r requirements.txt
 ```
 
 2. Ejecutar el [notebook](../lab/chat-app/infra/set_up.ipynb)
+
+## [Crear Infrastructura](../lab/chat-app/infra/set_up.ipynb)

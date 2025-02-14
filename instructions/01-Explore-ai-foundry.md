@@ -2,6 +2,7 @@
 lab:
     title: 'Prepara un proyecto de desarrollo de IA'
     description: 'Aprende a organizar recursos en la nube en hubs y proyectos para que los desarrolladores estén preparados para tener éxito al construir soluciones de IA.'
+    time: '25 min'
 ---
 
 # Prepara un proyecto de desarrollo de IA

@@ -2,6 +2,7 @@
 lab:
     title: 'Elija y despliegue un modelo de lenguaje'
     description: 'Las aplicaciones de IA generativa se basan en uno o más modelos de lenguaje. Aprende a encontrar y seleccionar los modelos adecuados para tu proyecto de IA generativa.'
+    time: '25 min'
 ---
 
 # Elija y despliegue un modelo de lenguaje
