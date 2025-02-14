@@ -137,21 +137,17 @@ resource embeddingsDeployment 'Microsoft.CognitiveServices/accounts/deployments@
   }
 }]
 
-resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
-  name: '${searchServiceName}-${resourceSuffix}'
-  location: searchServiceLocation
-  sku: {
-    name: searchServiceSku
-  }
-  properties: {
-    authOptions: {
-      aadOrApiKey: {
-        aadAuthFailureMode: 'http401WithBearerChallenge'
-      }
-    }
+module searchService 'br/public:avm/res/search/search-service:0.7.1'  = {
+  name: 'search-service'
+  scope: resourceGroup()
+  params: {
+    name: '${searchServiceName}-${resourceSuffix}'
+    location: searchServiceLocation
+    sku: searchServiceSku
+    managedIdentities: { systemAssigned: true }
     replicaCount: searchServiceReplicaCount
     partitionCount: searchServicePartitionCount
-  }
+    }
 }
 // vector-searching: additions END
 
@@ -203,6 +199,39 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   properties: {
     Application_Type: 'web'
     WorkspaceResourceId: logAnalytics.id
+  }
+}
+
+// Storage
+resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
+  name: 'storage${resourceSuffix}'
+  location: location
+  sku: {
+    name: 'Standard_LRS'
+  }
+  kind: 'StorageV2'
+}
+
+
+// Necessary for integrated vectorization, for search service to access storage
+module storageRoleSearchService './role.bicep' = {
+  scope: resourceGroup()
+  name: 'storage-role-searchservice'
+  params: {
+    principalId: searchService.outputs.systemAssignedMIPrincipalId
+    roleDefinitionId: '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1' // Storage Blob Data Reader
+    principalType: 'ServicePrincipal'
+  }
+}
+
+// Necessary for integrated vectorization, for search service to access OpenAI embeddings
+module openAiRoleSearchService './role.bicep' = {
+  scope: resourceGroup()
+  name: 'openai-role-searchservice'
+  params: {
+    principalId: searchService.outputs.systemAssignedMIPrincipalId
+    roleDefinitionId: '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd'
+    principalType: 'ServicePrincipal'
   }
 }
 
