@@ -46,6 +46,11 @@ param applicationInsightsName string = 'insights'
 
 @description('Location of the Application Insights resource')
 param applicationInsightsLocation string = resourceGroup().location
+
+@description('Principal ID for role assignment')
+param principalId string = ''
+var principalType = 'User' 
+
 // buult-in logging: additions END
 
 // vector-searching: additions BEGIN
@@ -149,6 +154,23 @@ module searchService 'br/public:avm/res/search/search-service:0.7.1'  = {
     managedIdentities: { systemAssigned: true }
     replicaCount: searchServiceReplicaCount
     partitionCount: searchServicePartitionCount
+    roleAssignments: [
+      {
+        roleDefinitionIdOrName: 'Search Index Data Reader'
+        principalId: principalId
+        principalType: principalType
+      }
+      {
+        roleDefinitionIdOrName: 'Search Index Data Contributor'
+        principalId: principalId
+        principalType: principalType
+      }
+      {
+        roleDefinitionIdOrName: 'Search Service Contributor'
+        principalId: principalId
+        principalType: principalType
+      }
+    ]
     }
 }
 // vector-searching: additions END
@@ -230,6 +252,19 @@ module storage 'br/public:avm/res/storage/storage-account:0.9.1' = {
         }
       ]
     }
+    roleAssignments: [
+      {
+        roleDefinitionIdOrName: 'Storage Blob Data Reader'
+        principalId: principalId
+        principalType: principalType
+      }
+      // For uploading documents to storage container:
+      {
+        roleDefinitionIdOrName: 'Storage Blob Data Contributor'
+        principalId: principalId
+        principalType: principalType
+      }
+    ]
   }
 }
 
