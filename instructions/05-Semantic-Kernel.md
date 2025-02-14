@@ -49,5 +49,5 @@ pip install -r requirements.txt
 ### 🗑️ Limpiar recursos
 
 Cuando hayas terminado con el laboratorio, debes eliminar todos los recursos desplegados en Azure para evitar cargos adicionales y mantener tu suscripción de Azure organizada.  
-Utiliza el [clean-up-resources notebook](./lab/chat-app/clea-up-resources.ipynb) para ello.
+Utiliza el [clean-up-resources notebook](./lab/chat-app/clean-up-resources.ipynb) para ello.
 
