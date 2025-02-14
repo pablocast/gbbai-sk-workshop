@@ -39,6 +39,13 @@ pip install -r requirements.txt
 
 1. Ejecutar el [notebook](../lab/chat-app/data/load.ipynb)
 
+## [Crear los plugins](../lab/chat-app/data/load.ipynb)
+
+
+
+## [Crear agente con los plugins](../lab/chat-app/data/load.ipynb)
+
+
 
 <a id='clean'></a>
 ### 🗑️ Limpiar recursos
