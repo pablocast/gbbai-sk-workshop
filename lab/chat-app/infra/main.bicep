@@ -48,7 +48,7 @@ param applicationInsightsName string = 'insights'
 param applicationInsightsLocation string = resourceGroup().location
 
 @description('Principal ID for role assignment')
-param principalId string = ''
+var principalId = 'principal_id'
 var principalType = 'User' 
 
 // buult-in logging: additions END
