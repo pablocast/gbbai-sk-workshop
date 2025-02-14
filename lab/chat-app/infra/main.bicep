@@ -21,6 +21,8 @@ param openAIModelCapacity int = 50
 
 param administratorLogin string
 
+param storageContainerName string 
+
 @secure()
 param administratorLoginPassword string
 param location string = resourceGroup().location
@@ -203,15 +205,33 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 }
 
 // Storage
-resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
-  name: 'storage${resourceSuffix}'
-  location: location
-  sku: {
-    name: 'Standard_LRS'
+module storage 'br/public:avm/res/storage/storage-account:0.9.1' = {
+  name: 'storage'
+  scope: resourceGroup()
+  params: {
+    name: 'storage${resourceSuffix}'
+    location: location
+    kind: 'StorageV2'
+    skuName: 'Standard_LRS'
+    publicNetworkAccess: 'Enabled'
+    networkAcls: {
+      defaultAction: 'Allow'
+      bypass: 'AzureServices'
+    }
+    allowBlobPublicAccess: false
+    allowSharedKeyAccess: false
+    blobServices: {
+      deleteRetentionPolicyDays: 2
+      deleteRetentionPolicyEnabled: true
+      containers: [
+        {
+          name: storageContainerName
+          publicAccess: 'None'
+        }
+      ]
+    }
   }
-  kind: 'StorageV2'
 }
-
 
 // Necessary for integrated vectorization, for search service to access storage
 module storageRoleSearchService './role.bicep' = {
