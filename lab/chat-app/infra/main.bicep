@@ -23,6 +23,9 @@ param administratorLogin string
 
 param storageContainerName string 
 
+@description('Principal ID for role assignment')
+param principalId string 
+
 @secure()
 param administratorLoginPassword string
 param location string = resourceGroup().location
@@ -47,8 +50,6 @@ param applicationInsightsName string = 'insights'
 @description('Location of the Application Insights resource')
 param applicationInsightsLocation string = resourceGroup().location
 
-@description('Principal ID for role assignment')
-var principalId = 'principal_id'
 var principalType = 'User' 
 
 // buult-in logging: additions END
