@@ -37,12 +37,7 @@ pip install -r requirements.txt
 
 ## [Indexar documentos en AI Search y Cargar datos fake transaccionales en Postgres](../lab/chat-app/data/load.ipynb)
 
-
-
-
-
-
-
+1. Ejecutar el [notebook](../lab/chat-app/data/load.ipynb)
 
 
 <a id='clean'></a>
