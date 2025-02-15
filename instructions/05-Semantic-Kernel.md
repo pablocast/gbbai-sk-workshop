@@ -44,7 +44,7 @@ pip install -r requirements.txt
 
 1. [Crear los plugins](../lab/chat-app/python/plugins/)
 Inspecciones los plugins:
-- [Buscar documentos indexados](../lab/chat-app/python/plugins/Search)
+- [Buscar en documentos indexados](../lab/chat-app/python/plugins/Search)
 - [Buscar en un banco transaccional](../lab/chat-app/python/plugins/DebitAccount)
 - [Consumir una API externa](../lab/chat-app/python/plugins/CreditCard)
 
