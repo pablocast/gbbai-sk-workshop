@@ -32,7 +32,7 @@ pip install -r requirements.txt
 
 2. Ejecutar el [notebook](../lab/chat-app/infra/set_up.ipynb)
 
-3. Adicionar las variables de ambiente con los recursos creados en [.env](./lab/chat-app/python/.sample-env). Renombrar el archivo de .sample-env a .env
+3. Adicionar las variables de ambiente con los recursos creados en [.sample-env](./lab/chat-app/python/.sample-env). Renombrar el archivo de .sample-env a .env
 
 
 ## [Indexar documentos en AI Search y Cargar datos fake transaccionales en Postgres](../lab/chat-app/data/load.ipynb)
