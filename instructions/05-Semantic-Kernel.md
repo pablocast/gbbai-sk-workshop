@@ -60,7 +60,7 @@ python lab/chat-app/python/app.py
 - Conecta el emulador de bot a http://localhost:3978/api/messages, completando el campo Bot Url como se muestra a continuación:
 ![Connect](media/bot-emulator-1.png)
 
-¡Chatea con tu nuevo bot!
+- ¡Chatea con tu nuevo bot!
 ![Chat](media/semantic-kernel-bot-1.png)
 
 
