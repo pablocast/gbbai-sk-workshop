@@ -39,12 +39,31 @@ pip install -r requirements.txt
 
 1. Ejecutar el [notebook](../lab/chat-app/data/load.ipynb)
 
-## [Crear los plugins](../lab/chat-app/data/load.ipynb)
+
+## [Crear el bot usando Semantic Kernel](../lab/chat-app/data/load.ipynb)
+
+1. [Crear los plugins](../lab/chat-app/python/plugins/)
 
 
+2. [Crear agente con los plugins](../lab/chat-app/python/bot/semantic_kernel_bot.py)
 
-## [Crear agente con los plugins](../lab/chat-app/data/load.ipynb)
 
+3. [Editar las instrucciones del agente](../lab/chat-app/python/bot/instructions.jinja)
+
+
+4. [Ejecutar la app]
+
+- Ejecutar la app:
+```bash
+source .venv/Scripts/Activate
+python lab/chat-app/python/app.py
+```
+
+- Conecta el emulador de bot a http://localhost:3978/api/messages, completando el campo Bot Url como se muestra a continuación:
+![Connect](media/1.set_up_bot_emulator.png)
+
+¡Chatea con tu nuevo bot!
+![Chat](media/2.chat_with_bot_emulator.png)
 
 
 <a id='clean'></a>

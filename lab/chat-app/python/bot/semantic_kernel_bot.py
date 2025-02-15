@@ -11,21 +11,19 @@ from semantic_kernel.connectors.ai.open_ai import (
     AzureChatPromptExecutionSettings,
     ExtraBody,
 )
-
 from semantic_kernel.agents import ChatCompletionAgent
 from semantic_kernel.contents import ChatHistory
 from semantic_kernel.connectors.ai.function_choice_behavior import FunctionChoiceBehavior
-
 from data_models import ConversationData
 from .state_management_bot import StateManagementBot
 from utils import replace_citations
-
-# Plugins
-from plugins.QuerySearch import querySearch as search_plugin
-from plugins.QueryCosmos import queryCosmos as cosmos_plugin
-
 from typing import TypedDict
 from typing import Annotated
+
+# 1. Import Plugins
+from plugins.Search import search as search_plugin
+from plugins.DebitAccount import debit_account as debit_account_plugin
+from plugins.CreditCard import credit_card as credit_card_plugin
 
 class SearchModel(TypedDict):
     search_query: Annotated[str, "The search query to use to query the Azure Search index."]
@@ -34,7 +32,7 @@ class SemanticKernelBot(StateManagementBot):
 
     def __init__(self, conversation_state: ConversationState, user_state: UserState, dialog: Dialog):
         super().__init__(conversation_state, user_state, dialog)
-        self.welcome_message = os.getenv("LLM_WELCOME_MESSAGE", "¡Hola y bienvenido a PromiBot! ¿En qué puedo ayudarte hoy?")
+        self.welcome_message = os.getenv("LLM_WELCOME_MESSAGE", "¡Hola y bienvenido al Banco Nacional de Costa Rica! ¿En qué puedo ayudarte hoy?")
 
     @staticmethod
     def to_json(obj):
@@ -48,17 +46,20 @@ class SemanticKernelBot(StateManagementBot):
                 await turn_context.send_activity(self.welcome_message)
 
     async def on_message_activity(self, turn_context: TurnContext):
-        # 1.Load conversation state
+        # Load conversation state
         conversation_data = await self.conversation_data_accessor.get(turn_context, ConversationData([]))
 
-        # 2.Add user message to history
+        # Add user message to history
         conversation_data.add_turn("user", turn_context.activity.text)
         
-        # 3.Create a new kernel
+        # 2.Create a new kernel
         kernel = sk.Kernel()
       
-        # 4.Add Azure Chat service 
-        credential = DefaultAzureCredential(managed_identity_client_id=os.getenv("MicrosoftAppId"))
+        # 3.Add Azure Chat service 
+        credential = DefaultAzureCredential(
+            managed_identity_client_id=os.getenv("MicrosoftAppId")
+        )
+
         chat_service = AzureChatCompletion(
             service_id="chat-gpt",
             ad_token_provider=get_bearer_token_provider(
@@ -68,37 +69,38 @@ class SemanticKernelBot(StateManagementBot):
             endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
             deployment_name=os.getenv("AZURE_OPENAI_GPT4o_DEPLOYMENT"),
         )
+
         kernel.add_service(chat_service)
         
-        ## 5. Add Plugins 
+        ## 4. Add Plugins 
         kernel.add_plugin(
-            search_plugin.QuerySearchPlugin(
+            search_plugin.SearchService(
                 service_endpoint=os.getenv("AZURE_SEARCH_ENDPOINT"),
                 index_name=os.getenv("AZURE_SEARCH_INDEX_NAME")
             ), 
-            plugin_name="QuerySearchPlugin"
+            plugin_name="SearchPlugin"
         )
 
         kernel.add_plugin(
-            cosmos_plugin.QueryCosmosPlugin(
-                cosmos_endpoint=os.getenv("AZURE_COSMOSDB_ENDPOINT"),
-                database_name=os.getenv("AZURE_COSMOSDB_DATABASE_NAME"),
-                container_name=os.getenv("AZURE_COSMOSDB_CONTAINER_NAME"),
+            debit_account_plugin.DebitAccountService(
+                database=os.getenv("AZURE_POSTGRES_DATABASE"),
+                user=os.getenv("AZURE_POSTGRES_USER"),
+                password=os.getenv("AZURE_POSTGRES_PASSWORD"),
+                host=os.getenv("AZURE_POSTGRES_SERVER")
             ),
-            plugin_name="QueryCosmosPlugin"
+            plugin_name="DebitAccountPlugin"
         )
-
-        path =  os.path.join(os.path.dirname(__file__), "../plugins")
+        
         kernel.add_plugin(
-                    plugin_name="Semantic",
-                    parent_directory=path,  
+            credit_card_plugin.CreditCardService(),
+            plugin_name="CreditCardPlugin"
         )
-
+        
         # 6. Add ChatCompletionAgent
         settings = kernel.get_prompt_execution_settings_from_service_id(service_id="chat-gpt")
         settings.function_choice_behavior = FunctionChoiceBehavior.Auto()
         
-        instructions_path = os.path.join(os.path.dirname(__file__), "../instructions.jinja")
+        instructions_path = os.path.join(os.path.dirname(__file__), "instructions.jinja")
         instructions = open(instructions_path, "r").read()
         
         agent = ChatCompletionAgent(
