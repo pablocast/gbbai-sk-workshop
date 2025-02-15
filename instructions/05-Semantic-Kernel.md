@@ -47,13 +47,15 @@ pip install -r requirements.txt
 
 2. [Adicionar servicio de chat](../lab/chat-app/python/bot/semantic_kernel_bot.py) 
 - Adicione un servicio `AzureChatCompletion` al kernel
-```python semantic_kernel_bot.py
+```python 
+# semantic_kernel_bot.py
  # 3.Add Azure Chat service 
 ```
 
 3. [Crear agente con los plugins](../lab/chat-app/python/bot/semantic_kernel_bot.py)
 - Crear un agente  `ChatCompletionAgent`
-```python semantic_kernel_bot.py
+```python 
+# semantic_kernel_bot.py
  # 6. Add ChatCompletionAgent
 ```
 
