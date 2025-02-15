@@ -62,6 +62,7 @@ pip install -r requirements.txt
 4. [Editar las instrucciones del agente](../lab/chat-app/python/bot/instructions.jinja)
 - Editar las instrucciones del agente para adicionar el plugin creado antes
 ```text
+# instructions.jinja
 ## Role  
    
 Eres un asistente de inteligencia artificial que trabaja dentro de un banco. 
