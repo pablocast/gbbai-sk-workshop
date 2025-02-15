@@ -22,11 +22,6 @@ Antes de comenzar el taller, asegúrate de tener lo siguiente:
       git clone https://github.com/your-username/semantic-kernel-workshop.git
       ```
 2. **Sigue las instrucciones del laboratorio**
-    - Las instrucciones detalladas del laboratorio se proporcionan en la [carpeta](./instructions/)
+    - Las instrucciones detalladas del laboratorio se proporcionan en la carpeta [instructions](./instructions/)
 
-## Archivos del Laboratorio
-
-- Accede a los archivos del laboratorio haciendo clic en el siguiente enlace:
-  - [Archivos del Laboratorio para los Módulos de Azure AI Vision](/c:/Users/pablocastao/OneDrive%20-%20Microsoft/Work/Clients/bccr/semantic-kernel-workshop/README.md)
-
-¡Feliz aprendizaje y codificación!
+¡Feliz aprendizaje!
