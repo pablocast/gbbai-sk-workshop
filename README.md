@@ -1,4 +1,4 @@
-# <img src=".instructions/media/semantic_kernel.jpg" alt="Azure Logo" style="width:30px;height:30px;"/> Semantic Kernel Worskhop
+# <img src="./instructions/media/semantic_kernel.jpg" alt="Semantic Kernel Logo" style="width:30px;height:30px;"/> Semantic Kernel Worskhop
 
 Bienvenido al repositorio del Taller de Kernel Semántico. Este repositorio contiene laboratorios y materiales de instrucción diseñados para ayudarte a comenzar con 
 
