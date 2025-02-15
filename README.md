@@ -22,9 +22,7 @@ Antes de comenzar el taller, asegúrate de tener lo siguiente:
       git clone https://github.com/your-username/semantic-kernel-workshop.git
       ```
 2. **Sigue las instrucciones del laboratorio**
-    - Las instrucciones detalladas del laboratorio se proporcionan en el repositorio. Comienza revisando el archivo del laboratorio vinculado a continuación.
-3. **Ejecuta y prueba**
-    - Ejecuta los ejemplos según las instrucciones y verifica que tu entorno de Azure esté configurado correctamente.
+    - Las instrucciones detalladas del laboratorio se proporcionan en la [carpeta](./instructions/)
 
 ## Archivos del Laboratorio
 
