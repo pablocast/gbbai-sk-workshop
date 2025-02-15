@@ -52,8 +52,6 @@ pip install -r requirements.txt
 
 
 4. [Ejecutar la app](../lab/chat-app/python/app.py)
-
-- Ejecutar la app:
 ```bash
 source .venv/Scripts/Activate
 python lab/chat-app/python/app.py
