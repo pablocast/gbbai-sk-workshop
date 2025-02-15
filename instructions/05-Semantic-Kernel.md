@@ -45,13 +45,22 @@ pip install -r requirements.txt
 1. [Crear los plugins](../lab/chat-app/python/plugins/)
 
 
-2. [Crear agente con los plugins](../lab/chat-app/python/bot/semantic_kernel_bot.py)
+2. [Adicionar servicio de chat](../lab/chat-app/python/bot/semantic_kernel_bot.py) 
+- Adicione un servicio `AzureChatCompletion` al kernel
+```python
+ # 3.Add Azure Chat service 
+```
+
+3. [Crear agente con los plugins](../lab/chat-app/python/bot/semantic_kernel_bot.py)
+- Crear un agente  `ChatCompletionAgent`
+```python
+ # 6. Add ChatCompletionAgent
+```
+
+4. [Editar las instrucciones del agente](../lab/chat-app/python/bot/instructions.jinja)
 
 
-3. [Editar las instrucciones del agente](../lab/chat-app/python/bot/instructions.jinja)
-
-
-4. [Ejecutar la app](../lab/chat-app/python/app.py)
+5. [Ejecutar la app](../lab/chat-app/python/app.py)
 ```bash
 source .venv/Scripts/Activate
 python lab/chat-app/python/app.py
