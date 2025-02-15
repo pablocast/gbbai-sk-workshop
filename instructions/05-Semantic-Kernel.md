@@ -51,7 +51,7 @@ pip install -r requirements.txt
 3. [Editar las instrucciones del agente](../lab/chat-app/python/bot/instructions.jinja)
 
 
-4. [Ejecutar la app]
+4. [Ejecutar la app](../lab/chat-app/python/app.py)
 
 - Ejecutar la app:
 ```bash
