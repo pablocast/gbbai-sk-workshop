@@ -19,7 +19,7 @@ Antes de comenzar el taller, asegúrate de tener lo siguiente:
     - Utiliza Git para clonar el repositorio en tu máquina local.
     - Ejemplo:
       ```
-      git clone https://github.com/your-username/semantic-kernel-workshop.git
+      https://github.com/pablocast/gbbai-sk-workshop.git
       ```
 2. **Sigue las instrucciones del laboratorio**
     - Las instrucciones detalladas del laboratorio se proporcionan en la carpeta [instructions](./instructions/)
