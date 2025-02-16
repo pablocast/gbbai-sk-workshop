@@ -25,9 +25,6 @@ from plugins.Search import search as search_plugin
 from plugins.DebitAccount import debit_account as debit_account_plugin
 from plugins.CreditCard import credit_card as credit_card_plugin
 
-class SearchModel(TypedDict):
-    search_query: Annotated[str, "The search query to use to query the Azure Search index."]
-
 class SemanticKernelBot(StateManagementBot):
 
     def __init__(self, conversation_state: ConversationState, user_state: UserState, dialog: Dialog):
