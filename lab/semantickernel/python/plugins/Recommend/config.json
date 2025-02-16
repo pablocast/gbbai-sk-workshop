@@ -1,0 +1,33 @@
+{  
+    "schema": 1,  
+    "type": "completion",  
+    "description": "Recomienda un producto financiero para el cliente",  
+    "completion": {  
+        "max_tokens": 256,  
+        "temperature": 0,  
+        "top_p": 0,  
+        "presence_penalty": 0,  
+        "frequency_penalty": 0  
+    },      
+    "parameters": {  
+        "type": "object",  
+        "properties": {  
+            "producto": {  
+                "type": "string",  
+                "description": "El producto financiero a recomendar." ,
+                "enum":["acciones", "bonos", "fondos de inversión", "cuentas de ahorro", "depósitos a plazo", "fondos de pensiones", "seguros de vida", "seguros de salud", "seguros de hogar", "seguros de automóvil", "seguros de viaje", "seguros de mascotas", "seguros de accidentes", "seguros de responsabilidad civil", "seguros de defensa jurídica", "seguros de decesos", "seguros de asistencia en viaje", "seguros de asistencia en carretera", "seguros de asistencia en hogar", "seguros de asistencia en mascotas", "seguros de asistencia en accidentes", "seguros de asistencia en responsabilidad civil", "seguros de asistencia en defensa jurídica", "seguros de asistencia en decesos", "seguros de asistencia en viaje", "seguros de asistencia en carretera", "seguros de asistencia en hogar", "seguros de asistencia en mascotas", "seguros de asistencia en accidentes", "seguros de asistencia en responsabilidad civil", "seguros de asistencia en defensa jurídica", "seguros de asistencia en decesos", "seguros de asistencia en viaje", "seguros de asistencia en carretera", "seguros de asistencia en hogar", "seguros de asistencia en mascotas", "seguros de asistencia en accidentes", "seguros de asistencia en responsabilidad civil", "seguros de asistencia en defensa jurídica", "seguros de asistencia en decesos", "seguros de asistencia en viaje", "seguros de asistencia en carretera", "seguros de asistencia en hogar", "seguros de asistencia en mascotas", "seguros de asistencia en accidentes", "seguros de asistencia en responsabilidad civil", "seguros de asistencia en defensa jurídica", "seguros de asistencia en decesos", "seguros de asistencia en viaje", "seguros de asistencia en carretera", "seguros de asistencia en hogar", "seguros de asistencia en mascotas"] 
+            },  
+            "perfil_de_riesgo": {  
+                "type": "string",  
+                "description": "El perfil de riesgo del cliente (e.g., conservador, moderado, agresivo).", 
+                "enum":["conservador", "moderado", "agresivo"]
+            },  
+            "personalizado": {  
+                "type": "string",  
+                "description": "Parámetros personalizados para usar en la recomendación."                  
+            }              
+        },  
+        "required": ["producto", "perfil_de_riesgo", "personalizado"]          
+    },  
+    "default_backends": []  
+}  
