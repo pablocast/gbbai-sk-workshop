@@ -69,7 +69,7 @@ Despues, cambia el nombre de [.sample-env] a [.env]
 
 > **Consejo**: A medida que agregues código en el archivo Python, asegúrate de mantener la indentación correcta.
 
-1. Ingresa el siguiente comando para editar el archivo de código Python [**chat-app.py**](/lab/chat-app/chat-app.py) que se proporcionó:
+1. Ingresa el siguiente comando para editar el archivo de código Python [**chat-app.py**](../lab/chat-app/chat-app.py) que se proporcionó:
 
 
 2. En el archivo de código, observa las declaraciones **import** que se han añadido al inicio del archivo. Luego, debajo del comentario **# Add AI Projects reference**, añade el siguiente código para referenciar la librería Azure AI Projects:
@@ -114,7 +114,7 @@ Despues, cambia el nombre de [.sample-env] a [.env]
 1. En el panel de línea de comandos de la Cloud Shell, ingresa el siguiente comando para ejecutar el código Python:
 
 ```bash
-python lab/chat-app.py
+python lab/chat-app/chat-app.py
 ```
 
 2. Cuando se te pida, ingresa una pregunta, por ejemplo, `¿Cuál es el animal más rápido de la Tierra?` y revisa la respuesta de tu modelo de IA generativa.
