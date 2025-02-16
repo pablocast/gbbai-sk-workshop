@@ -61,60 +61,16 @@ Ahora estás listo para desplegar un modelo de lenguaje de IA generativa que sop
 
 Ahora que has desplegado un modelo, puedes utilizar el Azure AI Foundry SDK para desarrollar una aplicación que converse con él.
 
-### Preparar la configuración de la aplicación
-
-1. En el portal Azure AI Foundry, visualiza la página **Resumen** de tu proyecto.
-2. En el área de **Detalles del proyecto**, anota la **Cadena de conexión del proyecto**. Utilizarás esta cadena para conectar tu aplicación cliente con el proyecto.
-3. Abre una nueva pestaña en el navegador (manteniendo la pestaña del portal Azure AI Foundry abierta). Luego, en la nueva pestaña, navega al [portal Azure](https://portal.azure.com) en `https://portal.azure.com`; e inicia sesión con tus credenciales de Azure si se solicita.
-4. Utiliza el botón **[ >_ ]** a la derecha de la barra de búsqueda en la parte superior de la página para crear una nueva Cloud Shell en el portal Azure, seleccionando un entorno de ***PowerShell***. La Cloud Shell proporciona una interfaz de línea de comandos en un panel en la parte inferior del portal Azure.
-
-    > **Nota**: Si previamente has creado una Cloud Shell que usa un entorno de *Bash*, cámbialo a ***PowerShell***.
-
-5. En la barra de herramientas de la Cloud Shell, en el menú **Configuración**, selecciona **Ir a la versión clásica** (esto es necesario para usar el editor de código).
-
-6. En el panel de PowerShell, introduce los siguientes comandos para clonar el repositorio GitHub de este ejercicio:
-
-    ```
-    rm -r mslearn-ai-foundry -f
-    git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
-    ```
-
-7. Una vez clonado el repositorio, navega hasta la carpeta que contiene los archivos de código de la aplicación de chat:
-
-    ```
-    cd mslearn-ai-foundry/labfiles/chat-app/python
-    ```
-
-8. En la línea de comandos de la Cloud Shell, ingresa el siguiente comando para instalar las bibliotecas de Python que utilizarás, que son:
-    - **python-dotenv** : Se usa para cargar la configuración desde un archivo.
-    - **azure-identity**: Se utiliza para autenticarse con las credenciales de Entra ID.
-    - **azure-ai-projects**: Se utiliza para trabajar con un proyecto de Azure AI Foundry.
-    - **azure-ai-inference**: Se usa para conversar con un modelo de IA generativa.
-
-    ```
-   pip install python-dotenv azure-identity azure-ai-projects azure-ai-inference
-    ```
-
-9. Ingresa el siguiente comando para editar el archivo de configuración de Python **.env** que se proporcionó:
-
-    ```
-   code .env
-    ```
-
-    Se abrirá el archivo en un editor de código.
-
-10. En el archivo, reemplaza el marcador de posición **your_project_endpoint** con la cadena de conexión de tu proyecto (copiada de la página **Resumen** del portal Azure AI Foundry), y el marcador **your_model_deployment** con el nombre que asignaste a tu despliegue del modelo Phi-4.
-11. Después de haber reemplazado los marcadores, utiliza el comando **CTRL+S** para guardar los cambios y luego el comando **CTRL+Q** para cerrar el editor de código, manteniendo abierta la línea de comandos de la Cloud Shell.
+### Edita las variables de ambiente
+Edita el archivo [.sample-env](../lab/chat-app/.sample-env) con los valores correspondientes.
+Despues, cambia el nombre de [.sample-env] a [.env]
 
 ### Escribir código para conectar el proyecto y conversar con el modelo
 
 > **Consejo**: A medida que agregues código en el archivo Python, asegúrate de mantener la indentación correcta.
 
-1. Ingresa el siguiente comando para editar el archivo de código Python **chat-app.py** que se proporcionó:
+1. Ingresa el siguiente comando para editar el archivo de código Python [**chat-app.py**](/lab/chat-app/chat-app.py) que se proporcionó:
 
-    ```
-   code chat-app.py
-    ```
 
 2. En el archivo de código, observa las declaraciones **import** que se han añadido al inicio del archivo. Luego, debajo del comentario **# Add AI Projects reference**, añade el siguiente código para referenciar la librería Azure AI Projects:
 
@@ -151,15 +107,15 @@ Ahora que has desplegado un modelo, puedes utilizar el Azure AI Foundry SDK para
    print(response.choices[0].message.content)
     ```
 
-7. Utiliza el comando **CTRL+S** para guardar los cambios en el archivo de código y luego **CTRL+Q** para cerrar el editor de código, manteniendo abierta la línea de comandos de la Cloud Shell.
+7. Utiliza el comando **CTRL+S** para guardar los cambios en el archivo de código 
 
 ### Ejecutar la aplicación de chat
 
 1. En el panel de línea de comandos de la Cloud Shell, ingresa el siguiente comando para ejecutar el código Python:
 
-    ```
-   python chat-app.py
-    ```
+```bash
+python lab/chat-app.py
+```
 
 2. Cuando se te pida, ingresa una pregunta, por ejemplo, `¿Cuál es el animal más rápido de la Tierra?` y revisa la respuesta de tu modelo de IA generativa.
 3. Prueba con algunas preguntas más. Cuando hayas terminado, escribe `quit` para salir del programa.

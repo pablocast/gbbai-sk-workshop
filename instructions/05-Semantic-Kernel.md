@@ -42,7 +42,7 @@ pip install -r requirements.txt
 
 ## [Crear el bot usando Semantic Kernel](../lab/chat-app/data/load.ipynb)
 
-1. [Crear los plugins](../lab/chat-app/python/plugins/)
+1. [Crear los plugins](../lab/chat-app/python/plugins/)<br>
 Explore los plugins:
     - [Buscar en documentos indexados](../lab/chat-app/python/plugins/Search)
     - [Buscar en un banco transaccional](../lab/chat-app/python/plugins/DebitAccount)
