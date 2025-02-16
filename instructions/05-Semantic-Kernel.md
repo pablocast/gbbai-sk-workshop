@@ -50,15 +50,12 @@ Explore los plugins:
 
 2. [Adicionar un nuevo plugin](../lab/chat-app/python/plugins/Recommend)
 - Vamos a redactar un plugin semantico para recomendar productos financieros.
-- En el archivo [skprompt.txt](../lab/semantickernel/python/plugins/Recommend/skprompt.txt)
-Por favor, redacta un prompt que utilice los parámetros "producto", "perfil_de_riesgo" y "personalizado" para recomendar un producto financiero al cliente. Asegúrate de que el prompt:
-
-Incorpore el parámetro "producto", seleccionando de las opciones enumeradas.
-Refleje el "perfil_de_riesgo" del cliente (conservador, moderado o agresivo).
-Incluya detalles relevantes del parámetro "personalizado" para personalizar la recomendación.
-Cumpla con el objetivo descrito en la "description": "Recomienda un producto financiero para el cliente".
-
-El prompt debe ser claro y proporcionar contexto suficiente para generar una recomendación adecuada basada en los parámetros especificados.
+- En el archivo [skprompt.txt](../lab/semantickernel/python/plugins/Recommend/skprompt.txt) , por favor redacta un prompt que utilice los parámetros "producto", "perfil_de_riesgo" y "personalizado" para recomendar un producto financiero al cliente. Asegúrate de que el prompt:
+    - Incorpore el parámetro "producto", seleccionando de las opciones enumeradas.
+    - Refleje el "perfil_de_riesgo" del cliente (conservador, moderado o agresivo).
+    - Incluya detalles relevantes del parámetro "personalizado" para personalizar la recomendación.
+    - Cumpla con el objetivo descrito en la "description": "Recomienda un producto financiero para el cliente".
+    - El prompt debe ser claro y proporcionar contexto suficiente para generar una recomendación adecuada basada en los parámetros especificados.
 
 
 2. [Adicionar servicio de chat](../lab/chat-app/python/bot/semantic_kernel_bot.py) 
