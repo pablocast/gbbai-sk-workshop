@@ -65,7 +65,7 @@ class SemanticKernelBot(StateManagementBot):
             deployment_name=os.getenv("AZURE_OPENAI_GPT4o_DEPLOYMENT"),
         )
 
-        kernel.add_service(chat_service)
+        # kernel.add_service(chat_service)
         
         ## 4. Add Plugins 
         kernel.add_plugin(
@@ -100,19 +100,19 @@ class SemanticKernelBot(StateManagementBot):
         )
         
         # 6. Add ChatCompletionAgent
-        settings = kernel.get_prompt_execution_settings_from_service_id(service_id="chat-gpt")
-        settings.function_choice_behavior = FunctionChoiceBehavior.Auto()
+        # settings = kernel.get_prompt_execution_settings_from_service_id(service_id="chat-gpt")
+        # settings.function_choice_behavior = FunctionChoiceBehavior.Auto()
         
-        instructions_path = os.path.join(os.path.dirname(__file__), "instructions.jinja")
-        instructions = open(instructions_path, "r").read()
+        # instructions_path = os.path.join(os.path.dirname(__file__), "instructions.jinja")
+        # instructions = open(instructions_path, "r").read()
         
-        agent = ChatCompletionAgent(
-            service_id="chat-gpt",
-            kernel=kernel,
-            name='agente',
-            instructions=instructions,
-            execution_settings=settings            
-        )
+        # agent = ChatCompletionAgent(
+        #     service_id="chat-gpt",
+        #     kernel=kernel,
+        #     name='agente',
+        #     instructions=instructions,
+        #     execution_settings=settings            
+        # )
 
         # 6. Add user input to the history
         history = ChatHistory()
