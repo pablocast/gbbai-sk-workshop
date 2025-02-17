@@ -1,0 +1,39 @@
+{
+    "schema": 1,
+    "name": "Recommend",
+    "type": "completion",
+    "description": "Expanda la intención del usuario, usando el historial de la conversación si es necesario",
+    "execution_settings": {
+        "default": {
+            "temperature": 0,
+            "number_of_responses": 1,
+            "top_p": 1,
+            "max_tokens": 3000,
+            "presence_penalty": 0.0,
+            "frequency_penalty": 0.0
+        }
+    },
+    "input_variables": [
+        {
+            "name": "producto",
+            "description": "El producto financiero a recomendar.",
+            "required": true,
+            "enum": ["fondo", "seguro", "cuenta", "tarjeta", "prestamo"]
+        },
+        {
+            "name": "perfil_de_riesgo",
+            "description": "El perfil de riesgo del cliente (e.g., conservador, moderado, agresivo).",
+            "required": true,
+            "enum": ["conservador", "moderado", "agresivo"]
+        },
+        {
+            "name": "personalizado",
+            "description": "Parámetros personalizados para usar en la recomendación.",
+            "required": true,
+            "enum": ["adulto_mayor", "joven", "mujer", "hombre", "estudiante", "profesional", "empresario", "inversionista", "ahorrador"]
+        }   
+    ]
+}
+
+
+

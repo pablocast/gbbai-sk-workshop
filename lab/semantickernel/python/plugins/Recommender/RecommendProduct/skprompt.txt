@@ -1,0 +1,10 @@
+Utilizando la siguiente información, por favor, recomienda un producto financiero adecuado para el cliente:
+
+Producto: {{$producto}}
+(Elige uno de los siguientes: acciones, bonos, fondos de inversión, cuentas de ahorro, depósitos a plazo, fondos de pensiones, seguros de vida, seguros de salud, seguros de hogar, seguros de automóvil, seguros de viaje, seguros de mascotas, seguros de accidentes, seguros de responsabilidad civil, seguros de defensa jurídica, seguros de decesos, seguros de asistencia en viaje, seguros de asistencia en carretera, seguros de asistencia en hogar, seguros de asistencia en mascotas)
+Perfil de riesgo: {{$perfil_de_riesgo}}
+(Opciones: conservador, moderado, agresivo)
+Personalizado: {{$personalizado}}
+(Información adicional relevante para personalizar la recomendación)
+
+Objetivo: Proporciona una recomendación detallada que tenga en cuenta el producto financiero especificado, el perfil de riesgo del cliente y cualquier información personalizada proporcionada. La recomendación debe ser clara, útil y adaptada a las necesidades del cliente, cumpliendo con el objetivo de ayudar al cliente a elegir el producto financiero más adecuado.
