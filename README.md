@@ -1,6 +1,6 @@
 # <img src="./instructions/media/semantic_kernel.jpg" alt="Semantic Kernel Logo" style="width:30px;height:30px;"/> Semantic Kernel Worskhop
 
-Bienvenido al repositorio del Taller de Semqntic Kernel. Este repositorio contiene laboratorios y materiales de instrucción diseñados para ayudarte a comenzar con el kernel.
+Bienvenido al repositorio del Taller de Semantic Kernel. Este repositorio contiene laboratorios y materiales de instrucción diseñados para ayudarte a comenzar con el kernel.
 
 ## Requisitos previos
 
