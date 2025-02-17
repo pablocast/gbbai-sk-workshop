@@ -48,7 +48,7 @@ Explore los plugins:
     - [Buscar en un banco transaccional](../lab/chat-app/python/plugins/DebitAccount)
     - [Consumir una API externa](../lab/chat-app/python/plugins/CreditCard)
 
-2. [Adicionar un nuevo plugin](../lab/semantickernel/python/plugins/Recommender/)
+2. [Adicionar un nuevo plugin](../lab/semantickernel/python/plugins/Recommender/RecommendProduct/)
 - Vamos a redactar un plugin semantico para recomendar productos financieros.
 - En el archivo [skprompt.txt](../lab/semantickernel/python/plugins/Recommender/RecommendProduct/skprompt.txt) , por favor redacta un prompt que utilice los parámetros "producto", "perfil_de_riesgo" y "personalizado" para recomendar un producto financiero al cliente. Asegúrate de que el prompt:
     - Incorpore el parámetro "producto", seleccionando de las opciones enumeradas.
